@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "/JqUqi9A6JAqpWUv+j+hOd724l7/VCwldusA+LxxzEY=",
+  "Source": "CourseWork",
+  "BasePath": "_content/CourseWork",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CourseWork\\wwwroot",
+      "Source": "CourseWork",
+      "ContentRoot": "C:\\Users\\angel\\OneDrive\\Рабочий стол\\web\\CourseWork\\CourseWork\\CourseWork\\wwwroot\\",
+      "BasePath": "_content/CourseWork",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\angel\\OneDrive\\Рабочий стол\\web\\CourseWork\\CourseWork\\CourseWork\\wwwroot\\index.html",
+      "SourceId": "CourseWork",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\angel\\OneDrive\\Рабочий стол\\web\\CourseWork\\CourseWork\\CourseWork\\wwwroot\\",
+      "BasePath": "_content/CourseWork",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ]
+}

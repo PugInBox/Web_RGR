@@ -1,0 +1,314 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+    <style>
+        td {
+            padding: 5px;
+        }
+
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Список фильмов и сериалов</h2>
+    <div>
+        <input type="hidden" id="movieId" />
+        <p>
+            Название:<br />
+            <input id="movieName" />
+        </p>
+        <p>
+            Жанр:<br />
+            <input id="movieGenre" />
+        </p>
+        <p>
+            Год издания:<br />
+            <input type="number" id="movieYear" />
+        </p>
+        <p>
+            Количество сезонов:<br />
+            <input type="number" id="movieNumSeasons" />
+        </p>
+        <p>
+            Количество эпизодов:<br />
+            <input type="number" id="movieNumEpisodes" />
+        </p>
+        <p>
+            Страна издания:<br />
+            <input id="movieCountryIssue" />
+        </p>
+        <p>
+            Дата просмотра:<br />
+            <input type="date" id="movieDate" />
+        </p>
+        <p>
+            <button id="saveBtn">Сохранить</button>
+            <button id="resetBtn">Сбросить</button>
+        </p>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Жанр</th>
+                <th>Год издания</th>
+                <th>Количество сезонов</th>
+                <th>Количество эпизодов</th>
+                <th>Страна издания</th>
+                <th>Дата просмотра</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        // Получение всех фильмов/сериалов
+        async function getMovies() {
+            // отправляет запрос и получаем ответ
+            const response = await fetch("/api/movies", {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            // если запрос прошел нормально
+            if (response.ok === true) {
+                // получаем данные
+                const movie = await response.json();
+                const rows = document.querySelector("tbody");
+                // добавляем полученные элементы в таблицу
+                movie.forEach(movie => rows.append(row(movie)));
+            }
+        }
+        // Получение фильма/сериала по id
+        async function getMovie(id) {
+            const response = await fetch(`/api/movies/${id}`, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const movie = await response.json();
+                document.getElementById("movieId").value = movie.id;
+                document.getElementById("movieName").value = movie.name;
+                document.getElementById("movieGenre").value = movie.genre;
+                document.getElementById("movieYear").value = movie.year;
+                document.getElementById("movieNumSeasons").value = movie.numSeasons;
+                document.getElementById("movieNumEpisodes").value = movie.numEpisodes;
+                document.getElementById("movieCountryIssue").value = movie.countryIssue;
+                document.getElementById("movieDate").value = movie.dateView;
+            }
+            else {
+                // если произошла ошибка, получаем сообщение об ошибке
+                const error = await response.json();
+                console.log(error.message); // и выводим его на консоль
+            }
+        }
+
+        // Получение фильма/сериала по жанру
+        async function getMovieGenre(genre) {
+            const response = await fetch(`/api/movie/genre/${genre}`, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const movie = await response.json();
+                document.getElementById("movieId").value = movie.id;
+                document.getElementById("movieName").value = movie.name;
+                document.getElementById("movieGenre").value = movie.genre;
+                document.getElementById("movieYear").value = movie.year;
+                document.getElementById("movieNumSeasons").value = movie.numSeasons;
+                document.getElementById("movieNumEpisodes").value = movie.numEpisodes;
+                document.getElementById("movieCountryIssue").value = movie.countryIssue;
+                document.getElementById("movieDate").value = movie.dateView;
+            }
+            else {
+                // если произошла ошибка, получаем сообщение об ошибке
+                const error = await response.json();
+                console.log(error.message); // и выводим его на консоль
+            }
+        }
+
+        // Получение фильма/сериала по наименованию
+        async function getMovieName(name) {
+            const response = await fetch(`/api/movies/name/${name}`, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const movie = await response.json();
+                document.getElementById("movieId").value = movie.id;
+                document.getElementById("movieName").value = movie.name;
+                document.getElementById("movieGenre").value = movie.genre;
+                document.getElementById("movieYear").value = movie.year;
+                document.getElementById("movieNumSeasons").value = movie.numSeasons;
+                document.getElementById("movieNumEpisodes").value = movie.numEpisodes;
+                document.getElementById("movieCountryIssue").value = movie.countryIssue;
+                document.getElementById("movieDate").value = movie.dateView;
+            }
+            else {
+                // если произошла ошибка, получаем сообщение об ошибке
+                const error = await response.json();
+                console.log(error.message); // и выводим его на консоль
+            }
+        }
+
+        // Добавление фильма/сериала
+        async function createMovie(movieName, movieGenre, movieYear, movieNumSeasons, movieNumEpisodes, movieCountryIssue, movieDate) {
+
+            const response = await fetch("api/movies", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: movieName,
+                    genre: movieGenre,
+                    year: movieYear,
+                    numSeasons: movieNumSeasons,
+                    numEpisodes: movieNumEpisodes,
+                    countryIssue: movieCountryIssue,
+                    dateView: movieDate
+                })
+            });
+            if (response.ok === true) {
+                const movie = await response.json();
+                document.querySelector("tbody").append(row(movie));
+            }
+            else {
+                const error = await response.json();
+                console.log(error.message);
+            }
+        }
+        // Изменение фильма/книги
+        async function editMovie(movieId, movieName, movieGenre, movieYear, movieNumSeasons, movieNumEpisodes, movieCountryIssue, movieDate) {
+            const response = await fetch("api/movies", {
+                method: "PUT",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    id: movieId,
+                    name: movieName,
+                    genre: movieGenre,
+                    year: movieYear,
+                    numSeasons: movieNumSeasons,
+                    numEpisodes: movieNumEpisodes,
+                    countryIssue: movieCountryIssue,
+                    dateView: movieDate
+                })
+            });
+            if (response.ok === true) {
+                const movie = await response.json();
+                document.querySelector(`tr[data-rowid='${movie.id}']`).replaceWith(row(movie));
+            }
+            else {
+                const error = await response.json();
+                console.log(error.message);
+            }
+        }
+        // Удаление пользователя
+        async function deleteMovie(id) {
+            const response = await fetch(`/api/movies/${id}`, {
+                method: "DELETE",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const movie = await response.json();
+                document.querySelector(`tr[data-rowid='${movie.id}']`).remove();
+            }
+            else {
+                const error = await response.json();
+                console.log(error.message);
+            }
+        }
+
+        // сброс данных формы после отправки
+        function reset() {
+            document.getElementById("movieId").value =
+                document.getElementById("movieName").value =
+                document.getElementById("movieGenre").value =
+                document.getElementById("movieYear").value =
+                document.getElementById("movieNumSeasons").value =
+                document.getElementById("movieNumEpisodes").value =
+                document.getElementById("movieCountryIssue").value =
+                document.getElementById("movieDate").value = "";
+        }
+        // создание строки для таблицы
+        function row(movie) {
+
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-rowid", movie.id);
+
+            const nameTd = document.createElement("td");
+            nameTd.append(movie.name);
+            tr.append(nameTd);
+
+            const GenreTd = document.createElement("td");
+            GenreTd.append(movie.genre);
+            tr.append(GenreTd);
+
+            const YearTd = document.createElement("td");
+            YearTd.append(movie.year);
+            tr.append(YearTd);
+
+            const NumSeasonsTd = document.createElement("td");
+            NumSeasonsTd.append(movie.numSeasons);
+            tr.append(NumSeasonsTd);
+
+            const NumEpisodesTd = document.createElement("td");
+            NumEpisodesTd.append(movie.numEpisodes);
+            tr.append(NumEpisodesTd);
+
+            const CountryIssueTd = document.createElement("td");
+            CountryIssueTd.append(movie.countryIssue);
+            tr.append(CountryIssueTd);
+
+            const DateViewTd = document.createElement("td");
+            DateViewTd.append(movie.dateView);
+            tr.append(DateViewTd);
+
+            const linksTd = document.createElement("td");
+
+            const editLink = document.createElement("button");
+            editLink.append("Изменить");
+            editLink.addEventListener("click", async () => await getMovie(movie.id));
+            linksTd.append(editLink);
+
+            const removeLink = document.createElement("button");
+            removeLink.append("Удалить");
+            removeLink.addEventListener("click", async () => await deleteMovie(movie.id));
+
+            linksTd.append(removeLink);
+            tr.appendChild(linksTd);
+
+            return tr;
+        }
+        // сброс значений формы
+        document.getElementById("resetBtn").addEventListener("click", () => reset());
+
+        // отправка формы
+        document.getElementById("saveBtn").addEventListener("click", async () => {
+
+            const id = document.getElementById("movieId").value;
+            const name = document.getElementById("movieName").value;
+            const genre = document.getElementById("movieGenre").value;
+            const year = document.getElementById("movieYear").value;
+            const numSeasons = document.getElementById("movieNumSeasons").value;
+            const numEpisodes = document.getElementById("movieNumEpisodes").value;
+            const countryIssue = document.getElementById("movieCountryIssue").value;
+            const dateView = document.getElementById("movieDate").value;
+            if (id === "")
+                await createMovie(name, genre, year, numSeasons, numEpisodes, countryIssue, dateView);
+            else
+                await editMovie(id, name, genre, year, numSeasons, numEpisodes, countryIssue, dateView);
+            reset();
+        });
+
+        // загрузка фильмов/сериалов
+        getMovies();
+    </script>
+</body>
+
+</html>

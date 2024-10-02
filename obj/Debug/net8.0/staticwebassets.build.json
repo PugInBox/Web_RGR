@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "uR7ZdxuR+ScHDgyIzzAhCP5Si+JX0mGyuqkYdFX5lRE=",
+  "Source": "CourseWork",
+  "BasePath": "_content/CourseWork",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CourseWork\\wwwroot",
+      "Source": "CourseWork",
+      "ContentRoot": "C:\\Users\\Artem\\Desktop\\WEB_RGR\\wwwroot\\",
+      "BasePath": "_content/CourseWork",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Artem\\Desktop\\WEB_RGR\\wwwroot\\index.html",
+      "SourceId": "CourseWork",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Artem\\Desktop\\WEB_RGR\\wwwroot\\",
+      "BasePath": "_content/CourseWork",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ]
+}
